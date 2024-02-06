@@ -27,15 +27,16 @@ const newGame = (player1, player2) => {
     Gameboard.boardState[position - 1] = player.mark;
     if (checkForwin(player.mark)) {
       win(player);
-    } else if (checkForDraw(position)) {
+    }
+    if (!Gameboard.boardState.includes(null)) {
       draw();
     }
   };
 
   const checkForwin = (mark) => {
     const sameMarkPositions = [];
-    for (let i = 0; i < boardState.length; i++) {
-      if (boardState[i] === mark) {
+    for (let i = 0; i < Gameboard.boardState.length; i++) {
+      if (Gameboard.boardState[i] === mark) {
         sameMarkPositions.push(i + 1);
       }
     }
@@ -45,9 +46,8 @@ const newGame = (player1, player2) => {
         Gameboard.winningPositions[i].every((el) =>
           sameMarkPositions.includes(el)
         )
-      ) {
+      )
         return true;
-      }
     }
     return false;
   };
@@ -63,5 +63,6 @@ const newGame = (player1, player2) => {
   return {
     player1,
     player2,
+    drawMark,
   };
 };
