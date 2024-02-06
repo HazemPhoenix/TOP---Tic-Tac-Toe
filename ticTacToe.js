@@ -65,12 +65,3 @@ const newGame = (player1, player2) => {
     player2,
   };
 };
-
-const test = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
-const indices = [];
-for (let i = 0; i < test.length; i++) {
-  if (test[i] % 2 == 0) {
-    indices.push(i);
-  }
-}
