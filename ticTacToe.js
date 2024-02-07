@@ -23,8 +23,10 @@ const newPlayer = (name, mark) => {
 };
 
 const newGame = (player1, player2) => {
+  drawBoard(Gameboard.boardState);
   const drawMark = (player, position) => {
     Gameboard.boardState[position - 1] = player.mark;
+    drawBoard(Gameboard.boardState);
     if (checkForwin(player.mark)) {
       win(player);
     }
@@ -65,4 +67,20 @@ const newGame = (player1, player2) => {
     player2,
     drawMark,
   };
+};
+
+const drawBoard = (boardState) => {
+  const container = document.querySelector(".container");
+  container.innerHTML = "";
+  for (let i = 0; i < boardState.length; i++) {
+    if (boardState[i] == null) {
+      const div = document.createElement("div");
+      div.innerText = "";
+      container.appendChild(div);
+    } else {
+      const div = document.createElement("div");
+      div.innerText = boardState[i];
+      container.appendChild(div);
+    }
+  }
 };
