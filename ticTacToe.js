@@ -6,12 +6,13 @@ const start = document.querySelector("#startBtn");
 
 start.addEventListener("click", (event) => {
   event.preventDefault();
-  const player1Name = document.querySelector(".player1Name");
-  const player2Name = document.querySelector(".player2Name");
-  newGame(
-    newPlayer(player1Name.value, "x", 0),
-    newPlayer(player2Name.value, "o", 0)
-  );
+  const player1Name = document.querySelector(".player1Name").value;
+  const player2Name = document.querySelector(".player2Name").value;
+  if (!player1Name || !player2Name) {
+    alert("Please choose the names of the players.");
+    return;
+  }
+  newGame(newPlayer(player1Name, "x", 0), newPlayer(player2Name, "o", 0));
   showScoreboard(
     { player1Name: player1Name, score: 0 },
     { player2Name: player2Name, score: 0 }
@@ -165,8 +166,8 @@ const showScoreboard = (player1, player2) => {
   const scoreboard = document.querySelector(".scoreboard");
   const firstPlayer = document.createElement("p");
   const secondPlayer = document.createElement("p");
-  firstPlayer.textContent = `${player1.player1Name.value}: ${player1.score}`;
-  secondPlayer.textContent = `${player2.player2Name.value}: ${player2.score}`;
+  firstPlayer.textContent = `${player1.player1Name}: ${player1.score}`;
+  secondPlayer.textContent = `${player2.player2Name}: ${player2.score}`;
   scoreboard.innerHTML = "";
   scoreboard.appendChild(firstPlayer);
   scoreboard.appendChild(secondPlayer);
