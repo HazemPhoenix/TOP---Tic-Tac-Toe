@@ -8,7 +8,14 @@ start.addEventListener("click", (event) => {
   event.preventDefault();
   const player1Name = document.querySelector(".player1Name");
   const player2Name = document.querySelector(".player2Name");
-  newGame(newPlayer(player1Name.value, "x"), newPlayer(player2Name.value, "o"));
+  newGame(
+    newPlayer(player1Name.value, "x", 0),
+    newPlayer(player2Name.value, "o", 0)
+  );
+  showScoreboard(
+    { player1Name: player1Name, score: 0 },
+    { player2Name: player2Name, score: 0 }
+  );
 });
 
 const Gameboard = (function () {
@@ -43,8 +50,8 @@ const drawBoard = () => {
   }
 };
 
-const newPlayer = (name, mark) => {
-  return { name, mark };
+const newPlayer = (name, mark, score) => {
+  return { name, mark, score };
 };
 
 addEventListener("load", () => {
@@ -119,7 +126,12 @@ const newGame = (player1, player2) => {
 
   const win = (player) => {
     alert(`${player.name} has won the game!`);
-    clearBoard();
+    player.score++;
+    updateScoreboard(player1, player2);
+    setTimeout(() => {
+      clearBoard();
+      newGame(player1, player2);
+    }, 500);
   };
 
   const draw = () => {
@@ -131,8 +143,36 @@ const newGame = (player1, player2) => {
     Gameboard.boardState = emptyBoard();
   };
 
+  const updateScoreboard = (player1, player2) => {
+    const scoreboard = document.querySelector(".scoreboard");
+    const firstPlayer = document.createElement("p");
+    const secondPlayer = document.createElement("p");
+    scoreboard.classList = "scoreboard";
+    firstPlayer.textContent = `${player1.name}: ${player1.score}`;
+    secondPlayer.textContent = `${player2.name}: ${player2.score}`;
+    scoreboard.innerHTML = "";
+    scoreboard.appendChild(firstPlayer);
+    scoreboard.appendChild(secondPlayer);
+  };
+
   return {
     player1,
     player2,
   };
+};
+
+const showScoreboard = (player1, player2) => {
+  const scoreboard = document.querySelector(".scoreboard");
+  const firstPlayer = document.createElement("p");
+  const secondPlayer = document.createElement("p");
+  firstPlayer.textContent = `${player1.player1Name.value}: ${player1.score}`;
+  secondPlayer.textContent = `${player2.player2Name.value}: ${player2.score}`;
+  scoreboard.innerHTML = "";
+  scoreboard.appendChild(firstPlayer);
+  scoreboard.appendChild(secondPlayer);
+};
+
+const score = {
+  player1: 0,
+  player2: 0,
 };

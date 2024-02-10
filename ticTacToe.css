@@ -66,3 +66,24 @@ button {
 button:hover {
   background-color: #960365;
 }
+
+.scoreboard {
+  font-size: large;
+  display: flex;
+  justify-content: space-between;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.scoreboard p {
+  margin: 0;
+}
+
+.scoreboard p:first-child {
+  margin-right: 20px;
+}
+
+.scoreboard p:last-child {
+  margin-left: 20px;
+}
