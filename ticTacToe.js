@@ -13,10 +13,7 @@ start.addEventListener("click", (event) => {
     return;
   }
   newGame(newPlayer(player1Name, "x", 0), newPlayer(player2Name, "o", 0));
-  showScoreboard(
-    { player1Name: player1Name, score: 0 },
-    { player2Name: player2Name, score: 0 }
-  );
+  showScoreboard({ player1Name, score: 0 }, { player2Name, score: 0 });
 });
 
 const Gameboard = (function () {
@@ -171,9 +168,4 @@ const showScoreboard = (player1, player2) => {
   scoreboard.innerHTML = "";
   scoreboard.appendChild(firstPlayer);
   scoreboard.appendChild(secondPlayer);
-};
-
-const score = {
-  player1: 0,
-  player2: 0,
 };
